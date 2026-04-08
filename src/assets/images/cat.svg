@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="200" height="220">
+  <!-- Body -->
+  <ellipse cx="100" cy="155" rx="55" ry="50" fill="#F4A460"/>
+
+  <!-- Head -->
+  <circle cx="100" cy="85" r="45" fill="#F4A460"/>
+
+  <!-- Left ear -->
+  <polygon points="62,50 50,15 80,40" fill="#F4A460"/>
+  <polygon points="65,47 55,22 77,42" fill="#FFB6C1"/>
+
+  <!-- Right ear -->
+  <polygon points="138,50 150,15 120,40" fill="#F4A460"/>
+  <polygon points="135,47 145,22 123,42" fill="#FFB6C1"/>
+
+  <!-- Face stripes -->
+  <line x1="60" y1="75" x2="75" y2="72" stroke="#CD853F" stroke-width="2" stroke-linecap="round"/>
+  <line x1="58" y1="82" x2="74" y2="82" stroke="#CD853F" stroke-width="2" stroke-linecap="round"/>
+  <line x1="60" y1="89" x2="75" y2="92" stroke="#CD853F" stroke-width="2" stroke-linecap="round"/>
+
+  <line x1="140" y1="75" x2="125" y2="72" stroke="#CD853F" stroke-width="2" stroke-linecap="round"/>
+  <line x1="142" y1="82" x2="126" y2="82" stroke="#CD853F" stroke-width="2" stroke-linecap="round"/>
+  <line x1="140" y1="89" x2="125" y2="92" stroke="#CD853F" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Eyes -->
+  <ellipse cx="83" cy="78" rx="10" ry="11" fill="white"/>
+  <ellipse cx="117" cy="78" rx="10" ry="11" fill="white"/>
+  <ellipse cx="84" cy="79" rx="6" ry="8" fill="#2E8B57"/>
+  <ellipse cx="118" cy="79" rx="6" ry="8" fill="#2E8B57"/>
+  <ellipse cx="84" cy="79" rx="3" ry="6" fill="#1a1a1a"/>
+  <ellipse cx="118" cy="79" rx="3" ry="6" fill="#1a1a1a"/>
+  <circle cx="86" cy="76" r="2" fill="white"/>
+  <circle cx="120" cy="76" r="2" fill="white"/>
+
+  <!-- Nose -->
+  <polygon points="100,90 96,96 104,96" fill="#FF69B4"/>
+
+  <!-- Mouth -->
+  <path d="M96,96 Q100,101 104,96" fill="none" stroke="#8B4513" stroke-width="1.5"/>
+
+  <!-- Whiskers left -->
+  <line x1="55" y1="87" x2="92" y2="90" stroke="#8B4513" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="52" y1="93" x2="91" y2="93" stroke="#8B4513" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="55" y1="99" x2="92" y2="96" stroke="#8B4513" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- Whiskers right -->
+  <line x1="145" y1="87" x2="108" y2="90" stroke="#8B4513" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="148" y1="93" x2="109" y2="93" stroke="#8B4513" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="145" y1="99" x2="108" y2="96" stroke="#8B4513" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- Left arm -->
+  <ellipse cx="48" cy="155" rx="14" ry="28" fill="#F4A460" transform="rotate(-20, 48, 155)"/>
+
+  <!-- Right arm -->
+  <ellipse cx="152" cy="155" rx="14" ry="28" fill="#F4A460" transform="rotate(20, 152, 155)"/>
+
+  <!-- Left paw -->
+  <ellipse cx="38" cy="178" rx="12" ry="9" fill="#F4A460"/>
+  <circle cx="32" cy="182" r="4" fill="#F4A460"/>
+  <circle cx="38" cy="184" r="4" fill="#F4A460"/>
+  <circle cx="44" cy="182" r="4" fill="#F4A460"/>
+
+  <!-- Right paw -->
+  <ellipse cx="162" cy="178" rx="12" ry="9" fill="#F4A460"/>
+  <circle cx="156" cy="182" r="4" fill="#F4A460"/>
+  <circle cx="162" cy="184" r="4" fill="#F4A460"/>
+  <circle cx="168" cy="182" r="4" fill="#F4A460"/>
+
+  <!-- Left leg -->
+  <ellipse cx="76" cy="200" rx="16" ry="20" fill="#F4A460"/>
+  <!-- Right leg -->
+  <ellipse cx="124" cy="200" rx="16" ry="20" fill="#F4A460"/>
+
+  <!-- Left foot -->
+  <ellipse cx="72" cy="215" rx="18" ry="10" fill="#F4A460"/>
+  <!-- Right foot -->
+  <ellipse cx="128" cy="215" rx="18" ry="10" fill="#F4A460"/>
+
+  <!-- Tail -->
+  <path d="M150,175 Q185,150 180,120 Q175,100 160,110" fill="none" stroke="#F4A460" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- Belly pattern -->
+  <ellipse cx="100" cy="158" rx="28" ry="30" fill="#FFDAB9" opacity="0.7"/>
+
+  <!-- Music notes -->
+  <text x="10" y="50" font-size="18" fill="#FF69B4" opacity="0.8">♪</text>
+  <text x="165" y="40" font-size="22" fill="#9370DB" opacity="0.8">♫</text>
+  <text x="5" y="100" font-size="14" fill="#FF69B4" opacity="0.6">♩</text>
+  <text x="175" y="90" font-size="16" fill="#9370DB" opacity="0.6">♪</text>
+</svg>

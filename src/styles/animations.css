@@ -1,0 +1,81 @@
+/* ===== 댄싱 애니메이션 keyframes ===== */
+
+/* 기본 댄스 - 좌우 흔들기 + 점프 */
+@keyframes dance {
+  0%   { transform: translateY(0) rotate(-8deg) scale(1); }
+  12%  { transform: translateY(-20px) rotate(0deg) scale(1.05); }
+  25%  { transform: translateY(-10px) rotate(8deg) scale(1); }
+  37%  { transform: translateY(-25px) rotate(0deg) scale(1.08); }
+  50%  { transform: translateY(0) rotate(-8deg) scale(1); }
+  62%  { transform: translateY(-15px) rotate(4deg) scale(1.05); }
+  75%  { transform: translateY(-5px) rotate(-4deg) scale(0.97); }
+  87%  { transform: translateY(-20px) rotate(6deg) scale(1.03); }
+  100% { transform: translateY(0) rotate(-8deg) scale(1); }
+}
+
+/* 활발한 댄스 */
+@keyframes dance-fast {
+  0%   { transform: translateY(0) rotate(-12deg) scale(1); }
+  10%  { transform: translateY(-28px) rotate(0deg) scale(1.1); }
+  20%  { transform: translateY(-8px) rotate(12deg) scale(0.95); }
+  30%  { transform: translateY(-32px) rotate(-6deg) scale(1.12); }
+  40%  { transform: translateY(0) rotate(-12deg) scale(1); }
+  50%  { transform: translateY(-20px) rotate(8deg) scale(1.08); }
+  60%  { transform: translateY(-5px) rotate(-8deg) scale(0.97); }
+  70%  { transform: translateY(-25px) rotate(10deg) scale(1.1); }
+  80%  { transform: translateY(-10px) rotate(-4deg) scale(1.02); }
+  90%  { transform: translateY(-30px) rotate(6deg) scale(1.06); }
+  100% { transform: translateY(0) rotate(-12deg) scale(1); }
+}
+
+/* 꼬리 흔들기 */
+@keyframes tail-wag {
+  0%   { transform: rotate(-20deg); }
+  50%  { transform: rotate(25deg); }
+  100% { transform: rotate(-20deg); }
+}
+
+/* 귀 흔들기 */
+@keyframes ear-wiggle {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(-8deg); }
+  75%  { transform: rotate(8deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* 음표 떠오르기 */
+@keyframes note-float {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-80px) scale(0.5); opacity: 0; }
+}
+
+/* 별 반짝임 */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  50%       { opacity: 1; transform: scale(1.2) rotate(180deg); }
+}
+
+/* 배경 색상 변화 */
+@keyframes bg-pulse {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 눈 깜빡임 */
+@keyframes blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  95%            { transform: scaleY(0.1); }
+}
+
+/* 발 구르기 */
+@keyframes foot-tap {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* 글로우 효과 */
+@keyframes glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.4)); }
+  50%      { filter: drop-shadow(0 0 20px rgba(147, 112, 219, 0.8)); }
+}
