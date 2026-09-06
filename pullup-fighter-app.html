@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="풀업파이터">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0f172a">
+<title>Pull-up Fighter Program</title>
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f172a'/%3E%3Ctext x='50' y='62' font-size='50' text-anchor='middle' fill='white'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #f5f5f4;
+    --surface: #ffffff;
+    --surface-2: #f0f0ee;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --border: rgba(11,11,11,0.10);
+    --border-strong: rgba(11,11,11,0.20);
+    --accent: #3b82f6;
+    --accent-hover: #2563eb;
+    --success: #10b981;
+    --success-hover: #059669;
+    --disabled: #d1d5db;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111110;
+      --surface: #1a1a19;
+      --surface-2: #232322;
+      --text-primary: #f0efec;
+      --text-secondary: #c3c2b7;
+      --text-muted: #898781;
+      --border: rgba(255,255,255,0.10);
+      --border-strong: rgba(255,255,255,0.20);
+    }
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 1.25rem 1rem calc(2rem + env(safe-area-inset-bottom));
+  }
+  h1 {
+    font-size: 20px;
+    margin: 0.5rem 0 0.25rem;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    text-align: center;
+    margin: 0 0 1.25rem;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .method-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+  }
+  .method-btn {
+    padding: 0.75rem 0.5rem;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text-primary);
+    transition: all 0.15s;
+  }
+  .method-btn small {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.8;
+    margin-top: 2px;
+  }
+  .method-btn.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  .card {
+    background: var(--surface);
+    padding: 1rem;
+    border-radius: 16px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  .card-header h2 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 700;
+  }
+  .card-header span {
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .rest-notice {
+    padding: 2rem 0;
+    text-align: center;
+  }
+  .rest-notice p:first-child {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .rest-notice p:last-child {
+    margin: 0.5rem 0 0;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .rep-boxes {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .rep-box {
+    padding: 0.6rem 0.8rem;
+    border-radius: 10px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    min-width: 42px;
+    transition: all 0.2s;
+  }
+  .rep-box.done {
+    background: #d4ffd4;
+    border-color: var(--success);
+    color: #065f46;
+  }
+  .progress-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 13px;
+  }
+  .progress-row span:last-child { font-weight: 600; }
+  .progress-track {
+    width: 100%;
+    height: 8px;
+    background: var(--surface-2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .today-total {
+    margin: 0.5rem 0 0;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 14px;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 0.75rem;
+    transition: all 0.15s;
+    -webkit-appearance: none;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary { background: var(--accent); }
+  .btn-success { background: var(--success); }
+  .btn-disabled { background: var(--disabled); cursor: not-allowed; }
+  .overview-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 280px;
+    overflow-y: auto;
+  }
+  .overview-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+  .overview-row.current {
+    background: var(--surface-2);
+    border-color: var(--border-strong);
+  }
+  .overview-row .label { color: var(--text-secondary); }
+  .overview-row .value { font-weight: 600; }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .stat-box {
+    padding: 0.85rem;
+    background: var(--surface-2);
+    border-radius: 10px;
+  }
+  .stat-box p:first-child {
+    margin: 0 0 0.4rem;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .stat-box p:last-child {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .install-hint {
+    margin-top: 1.5rem;
+    padding: 0.85rem 1rem;
+    background: var(--surface-2);
+    border-radius: 12px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🔥 PULL-UP FIGHTER</h1>
+  <p class="subtitle" id="subtitle">6일마다 자동 휴식일 포함</p>
+
+  <div class="method-grid">
+    <button class="method-btn" id="btnLadder" onclick="switchMethod('ladder')">
+      래더 방식<small>5-4-3-2-1 점증형 (30일)</small>
+    </button>
+    <button class="method-btn" id="btnUsmc" onclick="switchMethod('usmc')">
+      USMC 방식<small>38주 표준 프로그램</small>
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 id="stageLabel">1일차</h2>
+      <span id="dayLabel">1 / 35</span>
+    </div>
+    <div id="restNotice" class="rest-notice" style="display:none;">
+      <p>휴식일 🏖️</p>
+      <p>6일 운동 후 완전히 쉬는 날입니다.</p>
+    </div>
+    <div id="setSection">
+      <div class="rep-boxes" id="repBoxes"></div>
+      <div class="progress-row">
+        <span>진행도</span>
+        <span id="progressText">0 / 5 세트</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressBar"></div>
+      </div>
+      <p class="today-total" id="totalTodayReps">오늘 총 반복: 0개</p>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" id="actionBtn" onclick="handleAction()">세트 완료</button>
+  <button class="btn btn-disabled" id="finishBtn" onclick="finishDay()" disabled>완료 기록</button>
+
+  <div class="card">
+    <h3 style="margin:0 0 0.75rem; font-size:16px; font-weight:700;">전체 프로그램</h3>
+    <div class="overview-list" id="overviewList"></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin:0 0 1rem; font-size:16px; font-weight:700;">진행 상황</h3>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <p>완료한 운동일</p>
+        <p id="daysComplete">0 / 30</p>
+      </div>
+      <div class="stat-box">
+        <p>총 반복 횟수</p>
+        <p id="totalReps">0</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="install-hint">
+    📲 홈 화면에 추가하면 앱처럼 사용할 수 있어요<br>
+    iOS: 공유 버튼 → "홈 화면에 추가" · Android: 메뉴 → "홈 화면에 추가"
+  </p>
+</div>
+
+<script>
+function getLadderSets(day) {
+  const level = Math.floor((day - 1) / 5);
+  const remainder = (day - 1) % 5;
+  const base = [5, 4, 3, 2, 1];
+  return base.map((b, idx) => {
+    const posFromRight = 5 - idx;
+    const bonus = posFromRight <= remainder ? 1 : 0;
+    return b + level + bonus;
+  });
+}
+
+const ladderWorkouts = [];
+for (let d = 1; d <= 30; d++) ladderWorkouts.push(getLadderSets(d));
+
+const usmcWorkouts = [
+  [6,5,5,4,3],[7,6,5,4,4],[8,6,5,5,4],[8,7,5,5,5],[9,7,6,5,5],
+  [10,7,6,6,5],[10,8,6,6,6],[11,8,7,6,6],[12,8,7,7,6],[12,9,7,7,7],
+  [13,9,8,7,7],[14,9,8,8,7],[14,10,8,8,8],[15,10,9,8,8],[16,10,9,9,8],
+  [16,11,9,9,9],[17,11,10,9,9],[18,11,10,10,9],[18,12,10,10,10],
+  [19,12,11,10,10],[20,12,11,11,10],[20,13,11,11,11],[21,13,12,11,11],
+  [22,13,12,12,11],[22,14,12,12,12],[23,14,13,12,12],[24,14,13,13,12],
+  [24,15,13,13,13],[25,15,14,13,13],[26,15,14,14,13],[26,16,14,14,14],
+  [27,16,15,14,14],[28,16,15,15,14],[28,17,15,15,15],[29,17,16,15,15],
+  [30,17,16,16,15],[30,18,16,16,16],[31,18,17,16,16]
+];
+
+function buildSchedule(workouts, unitLabel) {
+  const schedule = [];
+  let workoutCount = 0;
+  workouts.forEach((sets) => {
+    workoutCount++;
+    schedule.push({ type: 'workout', label: unitLabel(workoutCount), sets });
+    if (workoutCount % 6 === 0) {
+      schedule.push({ type: 'rest', label: '휴식일' });
+    }
+  });
+  return schedule;
+}
+
+const methods = {
+  ladder: {
+    name: '래더 방식',
+    schedule: buildSchedule(ladderWorkouts, (n) => n + '일차'),
+    storageKey: 'pullup_method_ladder_app_v1'
+  },
+  usmc: {
+    name: 'USMC 38주 방식',
+    schedule: buildSchedule(usmcWorkouts, (n) => n + '주차'),
+    storageKey: 'pullup_method_usmc_app_v1'
+  }
+};
+
+let currentMethod = localStorage.getItem('pullup_selected_method_app_v1') || 'ladder';
+let state = {};
+
+function loadState(methodKey) {
+  const saved = JSON.parse(localStorage.getItem(methods[methodKey].storageKey));
+  state = saved || { currentIndex: 0, completedSets: 0, completedDays: {} };
+}
+
+function saveState() {
+  localStorage.setItem(methods[currentMethod].storageKey, JSON.stringify(state));
+  localStorage.setItem('pullup_selected_method_app_v1', currentMethod);
+}
+
+function switchMethod(methodKey) {
+  currentMethod = methodKey;
+  loadState(methodKey);
+  updateMethodButtons();
+  updateUI();
+}
+
+function updateMethodButtons() {
+  const btnLadder = document.getElementById('btnLadder');
+  const btnUsmc = document.getElementById('btnUsmc');
+  btnLadder.classList.toggle('active', currentMethod === 'ladder');
+  btnUsmc.classList.toggle('active', currentMethod === 'usmc');
+  document.getElementById('subtitle').textContent = methods[currentMethod].name + ' · 6일마다 자동 휴식일 포함';
+}
+
+function updateUI() {
+  const schedule = methods[currentMethod].schedule;
+  const entry = schedule[state.currentIndex];
+
+  document.getElementById('stageLabel').textContent = entry.label;
+  document.getElementById('dayLabel').textContent = `${state.currentIndex + 1} / ${schedule.length}`;
+
+  const restNotice = document.getElementById('restNotice');
+  const setSection = document.getElementById('setSection');
+  const actionBtn = document.getElementById('actionBtn');
+  const finishBtn = document.getElementById('finishBtn');
+
+  if (entry.type === 'rest') {
+    restNotice.style.display = 'block';
+    setSection.style.display = 'none';
+    actionBtn.style.display = 'none';
+    finishBtn.disabled = false;
+    finishBtn.textContent = '휴식일 확인 완료';
+    finishBtn.className = 'btn btn-success';
+  } else {
+    restNotice.style.display = 'none';
+    setSection.style.display = 'block';
+    actionBtn.style.display = 'block';
+
+    const targetSets = entry.sets.length;
+    const progress = (state.completedSets / targetSets) * 100;
+
+    const repBoxes = document.getElementById('repBoxes');
+    repBoxes.innerHTML = '';
+    entry.sets.forEach((rep, idx) => {
+      const box = document.createElement('div');
+      box.className = 'rep-box' + (idx < state.completedSets ? ' done' : '');
+      box.textContent = rep + '개';
+      repBoxes.appendChild(box);
+    });
+
+    document.getElementById('progressText').textContent = `${state.completedSets} / ${targetSets} 세트`;
+    document.getElementById('progressBar').style.width = progress + '%';
+    document.getElementById('totalTodayReps').textContent = `오늘 총 반복: ${entry.sets.reduce((a,b)=>a+b,0)}개`;
+
+    actionBtn.className = 'btn btn-primary';
+    if (state.completedSets < targetSets) {
+      actionBtn.textContent = `세트 완료 (${state.completedSets + 1} / ${targetSets})`;
+    } else {
+      actionBtn.textContent = '모든 세트 완료!';
+    }
+
+    finishBtn.disabled = state.completedSets === 0;
+    finishBtn.textContent = '완료 기록';
+    finishBtn.className = state.completedSets > 0 ? 'btn btn-success' : 'btn btn-disabled';
+  }
+
+  renderOverview();
+  renderStats();
+}
+
+function renderOverview() {
+  const schedule = methods[currentMethod].schedule;
+  const list = document.getElementById('overviewList');
+  list.innerHTML = '';
+  schedule.forEach((entry, idx) => {
+    const done = state.completedDays[idx];
+    const isCurrent = idx === state.currentIndex;
+    const row = document.createElement('div');
+    row.className = 'overview-row' + (isCurrent ? ' current' : '');
+    const setsLabel = entry.type === 'rest' ? '휴식' : entry.sets.join('-');
+    row.innerHTML = `
+      <span class="label">${entry.label}</span>
+      <span class="value" style="color: ${done ? '#10b981' : 'var(--text-primary)'};">${done ? '✓ ' : ''}${setsLabel}</span>
+    `;
+    row.onclick = () => {
+      if (idx <= getMaxUnlockedIndex()) {
+        state.currentIndex = idx;
+        state.completedSets = 0;
+        saveState();
+        updateUI();
+      }
+    };
+    list.appendChild(row);
+  });
+}
+
+function getMaxUnlockedIndex() {
+  const schedule = methods[currentMethod].schedule;
+  let maxIdx = 0;
+  for (let i = 0; i < schedule.length; i++) {
+    if (state.completedDays[i]) maxIdx = i + 1;
+  }
+  return Math.min(maxIdx, schedule.length - 1);
+}
+
+function renderStats() {
+  const schedule = methods[currentMethod].schedule;
+  const workoutEntries = schedule.filter(e => e.type === 'workout');
+  const completedWorkouts = schedule.filter((e, idx) => e.type === 'workout' && state.completedDays[idx]).length;
+  document.getElementById('daysComplete').textContent = `${completedWorkouts} / ${workoutEntries.length}`;
+
+  let totalReps = 0;
+  schedule.forEach((entry, idx) => {
+    if (state.completedDays[idx] && entry.type === 'workout') {
+      totalReps += entry.sets.reduce((a, b) => a + b, 0);
+    }
+  });
+  document.getElementById('totalReps').textContent = totalReps;
+}
+
+function handleAction() {
+  const schedule = methods[currentMethod].schedule;
+  const entry = schedule[state.currentIndex];
+  if (entry.type === 'rest') return;
+  if (state.completedSets < entry.sets.length) {
+    state.completedSets++;
+    saveState();
+    updateUI();
+  }
+}
+
+function finishDay() {
+  const schedule = methods[currentMethod].schedule;
+  const entry = schedule[state.currentIndex];
+  if (entry.type === 'workout' && state.completedSets === 0) return;
+
+  state.completedDays[state.currentIndex] = true;
+
+  if (state.currentIndex < schedule.length - 1) {
+    state.currentIndex++;
+    state.completedSets = 0;
+  }
+  saveState();
+  updateUI();
+}
+
+loadState(currentMethod);
+updateMethodButtons();
+updateUI();
+</script>
+</body>
+</html>
